@@ -1,4 +1,4 @@
-# Z4GR3US -> A Automated Recon Script
+# Z4GR3US -> Automated Recon Script
 
 ## Bug Bounty Recon Script
 
