@@ -1,6 +1,6 @@
-# Z4GR3US Chatbot
+# Chat-with-Z4G Chatbot
 
-Z4GR3US is a virtual chatbot powered by OpenAI. It can respond to various questions and provide relevant information. 
+Chat-with-Z4G is a virtual chatbot powered by OpenAI. It can respond to various questions and provide relevant information. 
 
 ## Getting Started
 
@@ -41,3 +41,6 @@ We welcome contributions to this project. If you would like to contribute, pleas
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+## NOTE: This is the part of Z4GR3US project, when the ChatGPT is down and not responding well then you can connect your API to this and start searching for the results. I will be constantly updating the source code for betterment of this Bot.
