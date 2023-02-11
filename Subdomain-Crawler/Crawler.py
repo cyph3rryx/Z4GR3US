@@ -4,15 +4,14 @@ def find_subdomains(url):
     subdomains = set()
     domain = url.split('://')[1].split('/')[0]
     try:
-        answers = dns.resolver.resolve(domain, 'NS')
+        answers = dns.resolver.resolve(domain, 'A')
     except dns.resolver.NXDOMAIN:
         return subdomains
     except dns.resolver.NoAnswer:
         return subdomains
 
     for rdata in answers:
-        subdomain = str(rdata.target).rstrip('.')
-        subdomains.add(subdomain)
+        subdomains.add(domain)
 
     return subdomains
 
