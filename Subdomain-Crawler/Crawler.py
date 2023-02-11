@@ -1,7 +1,8 @@
 import dns.resolver
 
-def find_subdomains(domain):
+def find_subdomains(url):
     subdomains = set()
+    domain = url.split('://')[1].split('/')[0]
     try:
         answers = dns.resolver.resolve(domain, 'NS')
     except dns.resolver.NXDOMAIN:
@@ -9,14 +10,14 @@ def find_subdomains(domain):
     except dns.resolver.NoAnswer:
         return subdomains
 
-    for server in answers:
-        subdomain = str(server).rstrip('.')
+    for rdata in answers:
+        subdomain = str(rdata.target).rstrip('.')
         subdomains.add(subdomain)
 
     return subdomains
 
-domain = input("Enter a website domain: ")
-subdomains = find_subdomains(domain)
+url = input("Enter a website URL: ")
+subdomains = find_subdomains(url)
 print(f"Found {len(subdomains)} subdomains:")
 
 filename = "subdomains.txt"
