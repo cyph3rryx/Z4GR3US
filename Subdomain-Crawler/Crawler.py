@@ -1,17 +1,13 @@
-import dns.resolver
+import sublist3r
 
 def find_subdomains(url):
     subdomains = set()
     domain = url.split('://')[1].split('/')[0]
-    try:
-        answers = dns.resolver.resolve(domain, 'A')
-    except dns.resolver.NXDOMAIN:
-        return subdomains
-    except dns.resolver.NoAnswer:
-        return subdomains
 
-    for rdata in answers:
-        subdomains.add(domain)
+    try:
+        subdomains = sublist3r.main(domain, savefile='subdomains.txt', silent=True)
+    except:
+        return subdomains
 
     return subdomains
 
