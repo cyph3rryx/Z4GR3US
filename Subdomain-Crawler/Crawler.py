@@ -3,7 +3,7 @@ import dns.resolver
 def find_subdomains(domain):
     subdomains = set()
     try:
-        answers = dns.resolver.query(domain, 'NS')
+        answers = dns.resolver.resolve(domain, 'NS')
     except dns.resolver.NXDOMAIN:
         return subdomains
     except dns.resolver.NoAnswer:
