@@ -60,72 +60,85 @@ waybackrobots $target_url > wayback-robots.txt
 
 # Find subdomains using MassDNS
 echo "Finding subdomains using MassDNS..."
-massdns -r /path/to/resolvers.txt -t A -o S -w massdns-output.txt /path/to/subdomains.txt
+massdns -r /path/to/resolvers.txt -t A -o S -w massdns-output.txt /path/to/subdomains.txt > /dev/null 2>&1
+awk '{print $1}' massdns-output.txt | sort -u > massdns-subdomains.txt
+
+# Combine subdomains from all sources
+echo "Combining subdomains from all sources..."
+cat subdomains.txt massdns-subdomains.txt | sort -u > all-subdomains.txt
 
 # Find subdomains using Sublist3r
+
 echo "Finding subdomains using Sublist3r..."
 sublist3r -d $target_url -o sublist3r-output.txt
 
 # Find parameters using FFuF
+
 echo "Finding parameters using FFuF..."
 ffuf -u $target_url/FUZZ -w /path/to/wordlist.txt -fc 403 -o fuf-output.txt
 
 # Find XSS vulnerabilities using XSSHunter
+
 echo "Finding XSS vulnerabilities using XSSHunter..."
 for subdomain in $(cat subdomains.txt)
 do
-  echo "Scanning $subdomain"
-  xsshunter -u $subdomain -o xss-vulnerabilities.txt
+echo "Scanning $subdomain"
+xsshunter -u $subdomain -o xss-vulnerabilities.txt
 done
 
 # Find SQL injection vulnerabilities using SQLMap
+
 echo "Finding SQL injection vulnerabilities using SQLMap..."
 for subdomain in $(cat subdomains.txt)
 do
-  echo "Scanning $subdomain"
-  sqlmap -u $subdomain --dbs --batch
+echo "Scanning $subdomain"
+sqlmap -u $subdomain --dbs --batch
 done
 
 # Find XXE vulnerabilities using XXEInjector
+
 echo "Finding XXE vulnerabilities using XXEInjector..."
 for subdomain in $(cat subdomains.txt)
 do
-  echo "Scanning $subdomain"
-  xxeinjector -u $subdomain -o xxe-vulnerabilities.txt
+echo "Scanning $subdomain"
+xxeinjector -u $subdomain -o xxe-vulnerabilities.txt
 done
 
 # Find SSRF vulnerabilities using SSRFDetector
+
 echo "Finding SSRF vulnerabilities using SSRFDetector..."
 for subdomain in $(cat subdomains.txt)
 do
-  echo "Scanning $subdomain"
-  ssrfdetector -u $subdomain -o ssrf-vulnerabilities.txt
+echo "Scanning $subdomain"
+ssrfdetector -u $subdomain -o ssrf-vulnerabilities.txt
 done
 
 # Find secrets in Git repositories using GitTools
+
 echo "Finding secrets in Git repositories using GitTools..."
 gittools -u $target_url -o git-repositories.txt
-for repo in $(cat git-repositories.txt)
-do
-  gitallsecrets -u $repo -o secrets.txt
-done
+while read -r repo; do
+gitallsecrets -u "$repo" -o secrets.txt
+done < git-repositories.txt
 
 # Find race condition vulnerabilities using RaceTheWeb
+
 echo "Finding race condition vulnerabilities using RaceTheWeb..."
 racetheweb -u $target_url -o race-conditions.txt
 
 # Test for CORS misconfigurations using CORStest
+
 echo "Testing for CORS misconfigurations using CORStest..."
 corstest -u $target_url -o cors-test.txt
 
 # Take screenshots of all URLs using EyeWitness
+
 echo "Taking screenshots of all URLs using EyeWitness..."
 eyewitness -f all-urls.txt -d eyewitness-screenshots
 
 # Find hidden parameters using parameth
+
 echo "Finding hidden parameters using parameth..."
 parameth -u $target_url -o hidden-parameters.txt
 
 echo "Bug bounty recon process complete!"
-
-
