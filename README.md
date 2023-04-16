@@ -6,7 +6,7 @@ Z4GR3US is a powerful security tool that combines various useful features for re
 
 - **Automated Recon**: Z4GR3US can perform automated reconnaissance on a target domain, gathering information about the target such as IP address, DNS records, and open ports.
 
-- **Upcoming features**: Z4GR3US is constantly being updated with new features, to make sure you have the best security tools at your disposal. I am working on different ideas like a Subdomain Ennumerator, Proxychain Extension for surfing and a Password Cracker. Will be updating the script here soon.
+- **Upcoming features**: Z4GR3US is constantly being updated with new features, to make sure you have the best security tools at your disposal. I am working on different ideas like a Subdomain Ennumerator, Proxychain Extension for surfing and a Password Cracker.
 
 ## Installation
 
