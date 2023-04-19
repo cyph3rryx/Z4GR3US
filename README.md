@@ -18,8 +18,6 @@ To install Z4GR3US, you will need to have Python3 installed on your system. Once
 Alternatively, you can clone this repository and install the dependencies manually:
 
 ``` bash git clone https://github.com/<YOUR_USERNAME>/z4gr3us.git
-cd z4gr3us
-pip3 install -r requirements.txt
 ```
 
 
