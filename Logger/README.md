@@ -21,4 +21,4 @@ You can customize the log file location, logging level, and log message format b
 Running a script to log everything when your PC turns on may have security and privacy implications. Use this script responsibly and with caution. It is your responsibility to ensure that this script does not violate any laws or regulations and that it does not compromise the security or privacy of any users.
 
 ## License
-This project is yet to be licensed (will update here soon) - see the LICENSE file for details.
+This project is licensed under MIT License - see the LICENSE file for details.
