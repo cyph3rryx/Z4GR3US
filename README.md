@@ -8,11 +8,6 @@ Z4GR3US is a powerful security tool that combines various useful features for re
 
 - **Upcoming features**: Z4GR3US is constantly being updated with new features, to make sure you have the best security tools at your disposal. I am working on different ideas like a Subdomain Ennumerator, Proxychain Extension for surfing and a Password Cracker. New tools like Malware Detection will be added soon.
 
-## Installation
-
-To install Z4GR3US, you will need to have Python3 installed on your system. Once you have Python3, you can install Z4GR3US using pip:
-
-``` bash pip3 install z4gr3us```
 
 
 Alternatively, you can clone this repository and install the dependencies manually:
