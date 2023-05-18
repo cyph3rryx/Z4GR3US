@@ -29,9 +29,4 @@ Once you have installed Z4GR3US, you can start using the tool by running the `z4
 If you would like to contribute to the development of Z4GR3US, please feel free to fork the repository and create a pull request. Please make sure to follow the existing coding style and to write unit tests for any new features you add.
 
 
-## License
 
-Z4GR3US is released under the MIT License. See the file for details.
-
-
-## Author: CYPH3RRYX
