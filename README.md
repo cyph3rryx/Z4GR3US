@@ -12,7 +12,7 @@ Z4GR3US is a powerful security tool that combines various useful features for re
 
 To install Z4GR3US, you will need to have Python3 installed on your system. Once you have Python3, you can install Z4GR3US using pip:
 
-``` bash pip3 install z4gr3us```
+```bash pip3 install z4gr3us```
 
 Alternatively, you can clone this repository and install the dependencies manually:
 
