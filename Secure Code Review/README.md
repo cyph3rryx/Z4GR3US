@@ -5,9 +5,13 @@ The Secure Code Review Tool is a command-line utility designed to analyze source
 ## Features
 
     - Detection of common security vulnerabilities, such as SQL injection, cross-site scripting (XSS), and insecure cryptographic implementations.
+    
     - Customizable security rules and patterns to adapt to specific project requirements.
+    
     - Integration with development workflows, including support for popular integrated development environments (IDEs) and code repositories.
+    
     - Real-time feedback and reporting to provide developers with immediate visibility into identified vulnerabilities.
+    
     - Continuous improvement through regular updates to incorporate new security rules and best practices.
 
 ## Installation
