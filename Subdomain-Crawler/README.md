@@ -1,5 +1,5 @@
 # Subdomain Crawler
-A tool to find and save subdomains of a given website.
+A Infosec tool to find and save subdomains of a given website.
 
 ## Introduction
 Subdomain Crawler is a program that takes a website URL as input, finds all its subdomains and saves the result in a text file with date, time, and domain name. The program uses various tools to gather subdomains information and optimize the user's time. During the loading time, an ASCII text is displayed to remove the boring loading screen.
