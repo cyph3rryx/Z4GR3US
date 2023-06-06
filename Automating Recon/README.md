@@ -6,6 +6,7 @@ This is a bash script that automates the bug bounty recon process using a variet
 
 ## Prerequisites
 
+
 - You will need to have the following tools installed:
   - subfinder
   - dirsearch
