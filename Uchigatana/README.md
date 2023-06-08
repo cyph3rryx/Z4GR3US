@@ -23,10 +23,6 @@ Uchigatana is a powerful security tool that allows you to perform various securi
 
 2. Install the required dependencies:
 
-   ```
-   pip install -r requirements.txt
-   ```
-
    Ensure that you have the necessary packages such as `paramiko` and `nmap` installed.
 
 3. Run the tool:
