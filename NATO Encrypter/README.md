@@ -1,4 +1,3 @@
-
 # NATO Phonetic Alphabet Encoder
 
 This is a Python program that encrypts a message using the NATO Phonetic Alphabet. The program takes a message as input and returns an encrypted message, where each letter of the original message is replaced with a word from the NATO phonetic alphabet.
