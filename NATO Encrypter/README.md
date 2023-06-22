@@ -20,7 +20,7 @@ python nato_alphabet.py "Hello, World!"
 
 The program will return the encrypted message:
 
-``` python
+```python
 Hotel Echo Lima Lima Oscar, Whiskey Oscar Romeo Lima Delta!
 ```
 
