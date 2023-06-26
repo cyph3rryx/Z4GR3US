@@ -1,5 +1,4 @@
 import re
-
 class SecureCodeReviewTool:
     def __init__(self, rules=None):
         self.rules = rules or []
