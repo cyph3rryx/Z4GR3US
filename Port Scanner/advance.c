@@ -12,6 +12,7 @@
 #define THREAD_POOL_SIZE 100
 #define SCAN_TIMEOUT 100
 
+
 void *scan_port(void *arg);
 
 int main(int argc, char **argv) {
