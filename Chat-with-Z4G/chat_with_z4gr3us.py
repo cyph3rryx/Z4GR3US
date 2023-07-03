@@ -18,6 +18,7 @@ def chatbot(prompt, api_key):
         return None
 
 print("Hi there! I'm Z4GR3US, your virtual chatbot. How can I help you today?")
+
 while True:
     user_input = input("\nUser: ")
     if user_input == "exit":
