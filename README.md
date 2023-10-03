@@ -33,5 +33,5 @@ If you would like to contribute to the development of Z4GR3US, please feel free 
 Z4GR3US is released under the MIT License. See the file for details.
 
 
-## Author: CYPH3RRYX
+## Author: Cyph3rRyx
 
