@@ -6,13 +6,6 @@ class SecureCodeReviewTool:
     def add_rule(self, rule):
         self.rules.append(rule)
     
-    def detect_vulnerabilities(self, code):
-        vulnerabilities = []
-        for rule in self.rules:
-            matches = re.findall(rule, code)
-            if matches:
-                vulnerabilities.append(matches)
-        return vulnerabilities
     
     def process_code(self, code):
         vulnerabilities = []
