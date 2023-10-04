@@ -171,10 +171,8 @@ timeout.tv_usec = (SCAN_TIMEOUT % 1000) * 1000;
 int ready = select(sock + 1, NULL, &fdset, NULL, &timeout);
 
 if (ready > 0) {
-    // The port is open
     close(sock);
 } else {
-    // The port is closed or filtered
     close(sock);
 }
 
