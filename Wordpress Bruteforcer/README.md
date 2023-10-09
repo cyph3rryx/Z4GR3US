@@ -47,4 +47,3 @@ Before using the Wordpress Bruteforcer, make sure you have:
 ## License
 
 This project is licensed under the MIT License - see the LICENSE.MD file for details.
-```
